@@ -21,8 +21,12 @@ public class Book extends Product implements Serializable{
         int salaryOfAuthor = 0;
         return author.getSalary(); }
 
-    @Override public String toString() {
-        return "ID: " + this.id + ", " + "title: " + title + "\n"
-             + "author: " + author.getFirstName() + author.getLastName() + "\n"
-             + "investment: " + this.getInvestment() + " USD\n"; }
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + this.id +
+                ", title=" + title +
+                ", author=" + author.getFirstName() + author.getLastName() +
+                ", investment=" + this.getInvestment() +
+                '}'; }
 }

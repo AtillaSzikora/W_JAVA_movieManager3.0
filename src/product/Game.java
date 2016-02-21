@@ -45,11 +45,16 @@ public class Game extends Product implements Buyable, Serializable {
         for (Person s : this.staff) {salaryOfStaff += s.getSalary();}
         return salaryOfStaff; }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         String strStaff = "";
         for(Person s : staff) {strStaff += s.getFirstName() + s.getLastName() + ", ";}
-        return "ID: " + this.id + ", " + "title: " + title + "\n"
-                + "preordered: " + preOrdered + "\n"
-                + "staff: " + strStaff + "\n"
-                + "price: " + getPrice() + " USD, " + "investment: " + this.getInvestment() + " USD\n"; }
+        return "Game{" +
+                "id=" + this.id +
+                ", title=" + title +
+                "preOrdered=" + preOrdered +
+                ", staff=" + strStaff +
+                ", price=" + price +
+                ", investment=" + this.getInvestment() +
+                '}'; }
 }

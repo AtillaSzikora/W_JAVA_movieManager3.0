@@ -6,51 +6,16 @@ import person.Person;
 import product.Game;
 import product.Genre;
 import product.Movie;
+import server.ReadObject;
+import server.WriteObject;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 public class RentManager {
-    
-    private static final String FILENAME = "data.ser";
 
-    public static int sumIncome (List<Buyable> someProducts) {
-        int totalIncome = 0;
-        for(Buyable p : someProducts) {totalIncome += p.getPrice();}
-        return totalIncome; }
-
-    public static void writeObject(List<Person> persons) {
-        System.out.println("The following objects are Serialized.");
-        try { FileOutputStream fos = new FileOutputStream(FILENAME);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            for (Person p : persons) {
-                oos.writeObject(p);
-                System.out.println(p);
-            }
-            oos.close();
-        }
-        catch (IOException e) {e.printStackTrace();}
-    }
-
-    public static void readObject() {
-        List<Person> resultObjList = new ArrayList<>();
-        System.out.println("\nThe following objects are Deserialized.");
-        try {
-            FileInputStream fis = new FileInputStream(FILENAME);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            while (true) {
-                try {resultObjList.add((Person) ois.readObject());}
-                catch (Exception e) {break;}
-            }
-            ois.close();
-        }
-        catch (IOException e) {e.printStackTrace();}
-        for (Person p : resultObjList) System.out.println(p);
-    }
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
         Person jani = new Person("Ja", "Ni", Gender.MALE, 100);
         Person jozsi = new Person("Jo", "Zsi", Gender.MALE, 200);
@@ -76,9 +41,10 @@ public class RentManager {
         Movie movie2 = new Movie("Good Wife", Genre.DRAMA, 120, 4, movie2Cast, 550);
         Movie movie3 = new Movie("Blue Bloods", Genre.COMEDY, 100, 2, movie3Cast, 650);
 
-        List<Buyable> someProducts = Arrays.asList(movie1, movie2, game2, game3);
+        List<Object> someProducts = Arrays.asList(book1, book2, book3);
+        File serializedFile = new File("data.ser");
 
-        writeObject(game1Staff);
-        readObject();
+        WriteObject.writeObj(someProducts, serializedFile);
+        ReadObject.readObj(serializedFile);
     }
 }

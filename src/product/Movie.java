@@ -59,11 +59,19 @@ public class Movie extends Product implements Buyable, Serializable {
         for (Person c : cast) {salaryOfCast += c.getSalary();}
         return salaryOfCast; }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         String strCast = "";
-        for(Person c : cast) {strCast += c.getFirstName() + c.getLastName() + ", ";}
-        return "ID: " + this.id + ", title: " + title + "\n"
-             + "genre: " + genre + ", duration: " + duration + "mins, rated: " + rate + "\n"
-             + "cast: " + strCast + "\n"
-             + "price: " + price + " USD, " + "investment: " + this.getInvestment() + " USD\n"; }
+        for(Person c : cast) {strCast += c.getFirstName() + c.getLastName() + ",";}
+        return "Movie{" +
+                "id=" + this.id +
+                ", title=" + title +
+                ", genre=" + genre +
+                ", duration=" + duration +
+                ", rate=" + rate +
+                ", cast=" + strCast +
+                " price=" + price +
+                ", investment=" + this.getInvestment() + " USD" +
+                '}';
+    }
 }
