@@ -8,12 +8,16 @@ import java.io.Serializable;
 public class Book extends Product implements Serializable{
 
     private Person author;
+    private String title;
+    private String id;
 
     public Book(String title, Person author) {
         this.title = title;
         this.author = author;
         this.id = IdGenerator.generate(this); }
 
+    public String getId() {return id;}
+    public String getTitle() {return title;}
     public Person getAuthor() {return author;}
     public void setAuthor(Person author) {this.author = author;}
 
@@ -21,8 +25,7 @@ public class Book extends Product implements Serializable{
         int salaryOfAuthor = 0;
         return author.getSalary(); }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         return "Book{" +
                 "id=" + this.id +
                 ", title=" + title +

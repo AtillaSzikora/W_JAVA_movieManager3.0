@@ -12,8 +12,9 @@ public class ReadObject {
     public static List<Object> readObj(File file) {
         System.out.println("\nTHE LISTED OBJECTS ARE DESERIALIZED FROM '" + file.getName() + "'");
         List<Object> objectList = new ArrayList<>();
-        try { int i = 0;
+        try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            int i = 0;
             while (true) {
                 try {
                     objectList.add(ois.readObject());

@@ -14,12 +14,10 @@ public class ObjectServer {
     public static void main (String[] args) throws IOException, InterruptedException {
 
         ServerSocket ss = new ServerSocket();
-        FileOutputStream fos = new FileOutputStream("data.str");
-        FileInputStream fis = new FileInputStream("data.str");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        while(true) {
-            ss.wait();
-        }
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data.str"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.str"));
+        ss.close();
+        oos.close();
+        ois.close();
     }
 }
