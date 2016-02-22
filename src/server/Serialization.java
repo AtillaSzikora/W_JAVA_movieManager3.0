@@ -1,13 +1,22 @@
 package server;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadObject {
+public class Serialization {
+
+    public static void writeObj(List<Object> objects, File file) {
+        System.out.println("\nTHE LISTED OBJECTS ARE SERIALIZED TO '" + file.getName() + "'");
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            for (Object o : objects) {
+                oos.writeObject(o);
+                System.out.println(o);
+            }
+            oos.close();
+        }
+        catch (IOException e) {e.printStackTrace();} }
 
     public static List<Object> readObj(File file) {
         System.out.println("\nTHE LISTED OBJECTS ARE DESERIALIZED FROM '" + file.getName() + "'");
@@ -25,6 +34,5 @@ public class ReadObject {
             ois.close();
         }
         catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
-        return objectList;
-    }
+        return objectList; }
 }
