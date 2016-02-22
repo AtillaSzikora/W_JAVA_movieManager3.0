@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 public class Movie extends Product implements Buyable, Serializable {
 
+    private String id;
+    private String title;
     private Genre genre;
     private long duration;
     private double rate;
@@ -24,6 +26,8 @@ public class Movie extends Product implements Buyable, Serializable {
         this.price = price;
         this.id = IdGenerator.generate(this); }
 
+    public String getId() {return id;}
+    @Override public String getTitle() {return title;}
     public Genre getGenre() {
         return genre;
     }
@@ -51,7 +55,6 @@ public class Movie extends Product implements Buyable, Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-
     @Override public int getPrice() {return price;}
 
     @Override public long getInvestment() {
@@ -59,10 +62,9 @@ public class Movie extends Product implements Buyable, Serializable {
         for (Person c : cast) {salaryOfCast += c.getSalary();}
         return salaryOfCast; }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         String strCast = "";
-        for(Person c : cast) {strCast += c.getFirstName() + c.getLastName() + ",";}
+        for (Person c : cast) {strCast += c.getFirstName() + c.getLastName() + ",";}
         return "Movie{" +
                 "id=" + this.id +
                 ", title=" + title +
@@ -71,7 +73,6 @@ public class Movie extends Product implements Buyable, Serializable {
                 ", rate=" + rate +
                 ", cast=" + strCast +
                 " price=" + price +
-                ", investment=" + this.getInvestment() + " USD" +
-                '}';
-    }
+                ", investment=" + this.getInvestment() +
+                '}'; }
 }

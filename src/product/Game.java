@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 public class Game extends Product implements Buyable, Serializable {
 
+    private String id;
+    private String title;
     private boolean preOrdered;
     private List<Person> staff;
     private int price;
@@ -20,6 +22,8 @@ public class Game extends Product implements Buyable, Serializable {
         this.price = price;
         this.id = IdGenerator.generate(this); }
 
+    public String getId() {return id;}
+    public String getTitle() {return title;}
     public boolean isPreOrdered() {
         return true;
     }
@@ -45,16 +49,15 @@ public class Game extends Product implements Buyable, Serializable {
         for (Person s : this.staff) {salaryOfStaff += s.getSalary();}
         return salaryOfStaff; }
 
-    @Override
-    public String toString() {
+    @Override public String toString() {
         String strStaff = "";
-        for(Person s : staff) {strStaff += s.getFirstName() + s.getLastName() + ", ";}
+        for(Person s : staff) {strStaff += s.getFirstName() + s.getLastName() + ",";}
         return "Game{" +
                 "id=" + this.id +
                 ", title=" + title +
-                "preOrdered=" + preOrdered +
+                ", preOrdered=" + preOrdered +
                 ", staff=" + strStaff +
-                ", price=" + price +
+                " price=" + price +
                 ", investment=" + this.getInvestment() +
                 '}'; }
 }
