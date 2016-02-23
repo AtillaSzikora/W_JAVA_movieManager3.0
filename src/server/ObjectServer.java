@@ -19,7 +19,7 @@ public class ObjectServer {
     public static void main (String[] args) throws IOException, InterruptedException, ClassNotFoundException {
 
         ServerSocket serverSocket = new ServerSocket(PORT);
-        System.out.println("Server is waiting for connection...");
+        System.out.println("Server is waiting for connection...\n");
         Socket socket = serverSocket.accept();
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -27,7 +27,7 @@ public class ObjectServer {
 
         if (command.equals(Command.PUT)) {
             objectList = (List<Object>) ois.readObject();
-            System.out.println("\nLISTED OBJECTS ARE RECIEVED FROM THE CLIENT.");
+            System.out.println("LISTED OBJECTS ARE RECIEVED FROM THE CLIENT.");
             save(); }
         if (command.equals(Command.GET)) {
             oos.writeObject(load());
