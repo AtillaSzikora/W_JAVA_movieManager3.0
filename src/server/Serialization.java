@@ -7,7 +7,7 @@ import java.util.List;
 public class Serialization {
 
     public static void serialize(List<Object> objectList, String fileName) {
-        System.out.println("\nTHE LISTED OBJECTS ARE SERIALIZED TO '" + fileName + "'");
+        System.out.println("THE LISTED OBJECTS ARE SERIALIZED TO '" + fileName + "'");
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
             for (Object o : objectList) {
@@ -19,7 +19,7 @@ public class Serialization {
         catch (IOException e) {e.printStackTrace();} }
 
     public static List<Object> deserialize(String fileName) {
-        System.out.println("\nTHE LISTED OBJECTS ARE DESERIALIZED FROM '" +fileName + "'");
+        System.out.println("THE LISTED OBJECTS ARE DESERIALIZED FROM '" +fileName + "'");
         List<Object> objectList = new ArrayList<>();
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
