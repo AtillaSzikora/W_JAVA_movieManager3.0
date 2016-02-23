@@ -1,24 +1,21 @@
 package server;
 
-import product.Instantiation;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class ObjectServer {
 
     ServerMode mode;
-    Object o;
     static final String FILENAME = "data.ser";
     public static final int PORT = 4567;
-    static List<Object> objectList;
+    static List<Object> objectList = new ArrayList<>();
 
-    Object load() {return o;}
-    void save() {}
+    List<Object> load() {return objectList;}
+    static void save() {Serialization.serialize(objectList, FILENAME);
+    }
 
     public static void main (String[] args) throws IOException, InterruptedException, ClassNotFoundException {
 
@@ -26,8 +23,12 @@ public class ObjectServer {
         System.out.println("Server is waiting for connection...");
         Socket socket = serverSocket.accept();
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        objectList = (List<Object>)ois.readObject();
+        if (ois.readObject() == Command.PUT) {
+            objectList = (List<Object>)ois.readObject();
+            save(); }
+
+
         socket.close();
-        Serialization.writeObj(objectList, FILENAME);
+        System.out.println("\nServer closed connection.");
     }
 }
