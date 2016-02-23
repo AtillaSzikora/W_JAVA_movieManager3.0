@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Serialization {
 
-    public static void writeObj(List<Object> objects, File file) {
-        System.out.println("\nTHE LISTED OBJECTS ARE SERIALIZED TO '" + file.getName() + "'");
+    public static void writeObj(List<Object> objectList, String fileName) {
+        System.out.println("\nTHE LISTED OBJECTS ARE SERIALIZED TO '" + fileName + "'");
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-            for (Object o : objects) {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+            for (Object o : objectList) {
                 oos.writeObject(o);
                 System.out.println(o);
             }
@@ -18,11 +18,11 @@ public class Serialization {
         }
         catch (IOException e) {e.printStackTrace();} }
 
-    public static List<Object> readObj(File file) {
-        System.out.println("\nTHE LISTED OBJECTS ARE DESERIALIZED FROM '" + file.getName() + "'");
+    public static List<Object> readObj(String fileName) {
+        System.out.println("\nTHE LISTED OBJECTS ARE DESERIALIZED FROM '" +fileName + "'");
         List<Object> objectList = new ArrayList<>();
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
             int i = 0;
             while (true) {
                 try {

@@ -1,26 +1,30 @@
 package main;
 
+import product.Instantiation;
+import server.ObjectServer;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
 
 public class RentManager {
 
+    private static final String FILENAME = "data.ser";
+    private static List<Object> objectList;
+
     public static void main(String[] args) throws IOException {
 
-        int number, temp;
+        objectList = Arrays.asList(
+                Instantiation.instanceMap().get("book1"),
+                Instantiation.instanceMap().get("book2"),
+                Instantiation.instanceMap().get("book3"));
 
-        Scanner scanner = new Scanner(System.in);                   // accept input from user
-        Socket socket = new Socket("127.0.0.1", 1234);              // create socket
-        Scanner scanner1 = new Scanner(socket.getInputStream());    // to accept result from server
-        System.out.println("Enter any number: ");                   // accept number from user
-        number = scanner.nextInt();                                 // save it to a variable
-
-        PrintStream p = new PrintStream(socket.getOutputStream());  // pass number to server
-        p.println(number);                                          // print the number onto the server
-
-        temp = scanner1.nextInt();                                  // accept result from server and store
-        System.out.println(temp);                                   // print out result got from server
+        Socket socket = new Socket("127.0.0.1", ObjectServer.PORT);
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        oos.writeObject(objectList);
+        socket.close();
     }
 }
