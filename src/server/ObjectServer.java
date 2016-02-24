@@ -12,6 +12,7 @@ public class ObjectServer {
     public static final int PORT = 4567;
     static List objectList = new ArrayList<>();
     ServerMode mode;
+    static int i = 0;
 
     static void save() {Serialization.serialize(objectList, FILENAME);}
     static List<Object> load() {return objectList = Serialization.deserialize(FILENAME);}
@@ -21,23 +22,23 @@ public class ObjectServer {
         ServerSocket serverSocket = new ServerSocket(PORT);
         while (true) {
             try {
-                System.out.println("\nServer is waiting for connection...\n");
+                System.out.println("\n(" + i++ + ") Server is waiting for connection...\n");
                 Socket socket = serverSocket.accept();
                 ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
                 Object command = ois.readObject();
                 if (command.equals(Command.PUT)) {
                     objectList = (List) ois.readObject();
-                    System.out.println("- - - Listed objects are recieved from the client - - -");
+                    System.out.println("- - - LISTED OBJECTS ARE RECIEVED FROM THE CLIENT - - -");
                     for (Object o : objectList) System.out.println(o);
                     save(); }
                 if (command.equals(Command.GET)) {
                     oos.writeObject(load());
-                    System.out.println("- - - Listed objects are sent to the client - - -");
+                    System.out.println("- - - LISTED OBJECTS ARE SENT TO THE CLIENT - - -");
                     for (Object o : objectList) System.out.println(o); }
                 if (command.equals(Command.EXIT)) {break;} }
             catch (IOException e) {break;} }
 //          socket.close();
-        System.out.println("\nServer closed connection.");
+        System.out.println("Server closed connection.");
     }
 }
