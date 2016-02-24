@@ -9,10 +9,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class RentManager {
 
-    static int clientMode = 2;  // PUT 1 | GET 2 | EXIT 0
+    static int clientMode = 3;  // PUT 1 | GET 2 | EXIT 0
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
@@ -26,6 +27,14 @@ public class RentManager {
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("Choose a number, to send command to the server:" +
+//                         "\n\t1: (PUT) write objects to file" +
+//                         "\n\t2: (GET) read objects from file" +
+//                         "\n\t3: (EXIT) shutdown server" +
+//                         "\n\t0: terminate client");
+//        scanner.nextInt();
+
         switch (clientMode) {
             case 1 : {
                 oos.writeObject(Command.PUT);
@@ -37,11 +46,10 @@ public class RentManager {
                 List newObjectList = (List) ois.readObject();
                 System.out.println("- - - Listed objects are recieved from the server - - -");
                 for (Object o : newObjectList) System.out.println(o); break; }
-            case 0 : {
+            case 3 : {
                 oos.writeObject(Command.EXIT);
-                System.out.println("\nServer closed connection."); break; } }
+                System.out.println("\nClient closed connection.");
+                break; } }
 
-        socket.close();
-        System.out.println("\nClient closed connection.");
-    }
+        socket.close(); }
 }
