@@ -15,6 +15,7 @@ public class RentManager {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
+        int i = 1;
         List<Object> objectList = Arrays.asList(
                 Instantiation.instanceMap().get("movie1"),
                 Instantiation.instanceMap().get("movie2"),
@@ -27,10 +28,10 @@ public class RentManager {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.print("\n1. (PUT) send objects to the server" +
-                             "\n2. (GET) read objects from the server" +
-                             "\n0. (EXIT) shutdown server and client" +
-                             "\nChoose a number, to send command to the server: ");
+            System.out.print("\n\t1. (PUT) send objects to the server" +
+                             "\n\t2. (GET) read objects from the server" +
+                             "\n\t0. (EXIT) shutdown server and client" +
+                             "\n(" + i++ + ") Choose a number, to send command to the server: ");
             int clientMode = scanner.nextInt();
 
             if (clientMode == 1) {

@@ -12,7 +12,7 @@ public class ObjectServer {
     public static final int PORT = 4567;
     static List objectList = new ArrayList<>();
     ServerMode mode;
-    static int i = 0;
+    static int i = 1;
 
     static void save() {Serialization.serialize(objectList, FILENAME);}
     static List<Object> load() {return objectList = Serialization.deserialize(FILENAME);}
@@ -20,13 +20,14 @@ public class ObjectServer {
     public static void main (String[] args) throws IOException, InterruptedException, ClassNotFoundException {
 
         ServerSocket serverSocket = new ServerSocket(PORT);
+        System.out.println("Server is waiting for connection...");
         Socket socket = serverSocket.accept();
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
         while (true) {
             try {
-                System.out.println("\n(" + i++ + ") Server is waiting for connection...\n");
+                System.out.println("\n(" + i++ + ") Request arrived from client...\n");
                 Object command = ois.readObject();
                 if (command.equals(Command.PUT)) {
                     objectList = (List) ois.readObject();
