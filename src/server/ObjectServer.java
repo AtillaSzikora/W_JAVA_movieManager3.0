@@ -20,12 +20,13 @@ public class ObjectServer {
     public static void main (String[] args) throws IOException, InterruptedException, ClassNotFoundException {
 
         ServerSocket serverSocket = new ServerSocket(PORT);
+        Socket socket = serverSocket.accept();
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+
         while (true) {
             try {
                 System.out.println("\n(" + i++ + ") Server is waiting for connection...\n");
-                Socket socket = serverSocket.accept();
-                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
                 Object command = ois.readObject();
                 if (command.equals(Command.PUT)) {
                     objectList = (List) ois.readObject();
@@ -38,7 +39,8 @@ public class ObjectServer {
                     for (Object o : objectList) System.out.println(o); }
                 if (command.equals(Command.EXIT)) {break;} }
             catch (IOException e) {break;} }
-//          socket.close();
+
+        socket.close();
         System.out.println("Server closed connection.");
     }
 }

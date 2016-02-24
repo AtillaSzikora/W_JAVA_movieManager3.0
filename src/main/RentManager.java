@@ -21,29 +21,29 @@ public class RentManager {
                 Instantiation.instanceMap().get("game2"));
 
         Socket socket = new Socket("127.0.0.1", ObjectServer.PORT);
-        System.out.println("Client initiated connection...\n");
+        System.out.println("Client initiated connection...");
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-
         Scanner scanner = new Scanner(System.in);
-        System.out.print("1. (PUT) send objects to the server" +
-                         "\n2. (GET) read objects from the server" +
-                         "\n0. (EXIT) shutdown server and client" +
-                         "\nChoose a number, to send command to the server: ");
-        int clientMode = scanner.nextInt();
 
-        switch (clientMode) {
-            case 1 : {
+        while (true) {
+            System.out.print("\n1. (PUT) send objects to the server" +
+                             "\n2. (GET) read objects from the server" +
+                             "\n0. (EXIT) shutdown server and client" +
+                             "\nChoose a number, to send command to the server: ");
+            int clientMode = scanner.nextInt();
+
+            if (clientMode == 1) {
                 oos.writeObject(Command.PUT);
                 oos.writeObject(objectList);
                 System.out.println("\n- - - LISTED OBJECTS ARE SENT TO THE SERVER - - -");
-                for (Object o : objectList) System.out.println(o); break; }
-            case 2 : {
+                for (Object o : objectList) System.out.println(o); }
+            if (clientMode == 2) {
                 oos.writeObject(Command.GET);
                 List newObjectList = (List) ois.readObject();
                 System.out.println("\n- - - LISTED OBJECTS ARE RECIEVED FROM THE SERVER - - -");
-                for (Object o : newObjectList) System.out.println(o); break; }
-            case 0 : {
+                for (Object o : newObjectList) System.out.println(o); }
+            if (clientMode == 0) {
                 oos.writeObject(Command.EXIT);
                 System.out.println("\nServer and client shut down."); break; } }
 
