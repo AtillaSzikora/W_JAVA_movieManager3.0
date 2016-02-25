@@ -17,9 +17,9 @@ public class RentManager {
 
         int i = 1;
         List<Object> objectList = Arrays.asList(
-                Instantiation.instanceMap().get("movie1"),
-                Instantiation.instanceMap().get("movie2"),
-                Instantiation.instanceMap().get("game2"));
+                Instantiation.instanceMap().get("book1"),
+                Instantiation.instanceMap().get("book2"),
+                Instantiation.instanceMap().get("book3"));
 
         Socket socket = new Socket("127.0.0.1", ObjectServer.PORT);
         System.out.println("Client initiated connection...");
@@ -48,5 +48,5 @@ public class RentManager {
                 oos.writeObject(Command.EXIT);
                 System.out.println("\nServer and client shut down."); break; } }
 
-        socket.close(); }
+        scanner.close(); oos.close(); ois.close(); socket.close(); }
 }

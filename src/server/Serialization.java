@@ -9,7 +9,7 @@ public class Serialization {
     public static void serialize(List<Object> objectList, String fileName) {
         System.out.println("- - - LISTED OBJECTS ARE SERIALIZED TO '" + fileName + "' - - -");
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName, true));
             for (Object o : objectList) {
                 oos.writeObject(o);
                 System.out.println(o); }

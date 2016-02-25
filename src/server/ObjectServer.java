@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ObjectServer {
 
-    static final String FILENAME = "data.ser";
+    static final String FILENAME = "data.bin";
     public static final int PORT = 4567;
     static List objectList = new ArrayList<>();
     ServerMode mode;
@@ -27,21 +27,20 @@ public class ObjectServer {
 
         while (true) {
             try {
-                System.out.println("\n(" + i++ + ") Request arrived from client...\n");
                 Object command = ois.readObject();
+                System.out.println("\n(" + i++ + ") " + command + " request arrived from client...");
                 if (command.equals(Command.PUT)) {
                     objectList = (List) ois.readObject();
                     System.out.println("- - - LISTED OBJECTS ARE RECIEVED FROM THE CLIENT - - -");
-                    for (Object o : objectList) System.out.println(o);
+                    for (Object o : objectList) {System.out.println(o);}
                     save(); }
                 if (command.equals(Command.GET)) {
                     oos.writeObject(load());
                     System.out.println("- - - LISTED OBJECTS ARE SENT TO THE CLIENT - - -");
-                    for (Object o : objectList) System.out.println(o); }
+                    for (Object o : objectList) {System.out.println(o);} }
                 if (command.equals(Command.EXIT)) {break;} }
-            catch (IOException e) {break;} }
+            catch (IOException e) {e.printStackTrace();} }
 
-        socket.close();
-        System.out.println("Server closed connection.");
-    }
+        oos.close(); ois.close(); socket.close(); serverSocket.close();
+        System.out.println("Server closed connection."); }
 }
