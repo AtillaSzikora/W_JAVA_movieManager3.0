@@ -24,9 +24,9 @@ public class Serialization {
             while (true) {
                 try {
                     tempObj = fois.readObject();
-//                    if ((Integer)tempObj != 1)
+                    if (tempObj != Command.HEADER) {
                         objectList.add(tempObj);
-                    System.out.println(objectList.get(i++)); }
+                    System.out.println(objectList.get(i++)); } }
                 catch (IOException e) {break;} }
             fois.close(); }
         catch (IOException | ClassNotFoundException e) {e.printStackTrace();}

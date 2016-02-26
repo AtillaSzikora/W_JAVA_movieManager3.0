@@ -22,7 +22,7 @@ public class ObjectServer {
 
         if (!Files.isRegularFile(filePath)) {
             ObjectOutputStream foos = new ObjectOutputStream(new FileOutputStream("data.bin"));
-            foos.writeObject(i);
+            foos.writeObject(Command.HEADER);
             foos.close(); }
 
         ServerSocket serverSocket = new ServerSocket(PORT);

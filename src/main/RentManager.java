@@ -17,9 +17,9 @@ public class RentManager {
 
         int i = 1;
         List<Object> objectList = Arrays.asList(
-                Instantiation.instanceMap().get("jani"),
-                Instantiation.instanceMap().get("jozsi"),
-                Instantiation.instanceMap().get("jolan"));
+                Instantiation.instanceMap().get("book1"),
+                Instantiation.instanceMap().get("book2"),
+                Instantiation.instanceMap().get("book3"));
 
         Socket socket = new Socket("127.0.0.1", ObjectServer.PORT);
         System.out.println("Client initiated connection...");
@@ -31,7 +31,7 @@ public class RentManager {
             System.out.print("\n\t1. (PUT) send objects to the server" +
                              "\n\t2. (GET) read objects from the server" +
                              "\n\t0. (EXIT) shutdown server and client" +
-                             "\n(" + i++ + ") Chsoose a number to send command to the server: ");
+                             "\n(" + i++ + ") Choose a number to send command to the server: ");
             int clientMode = scanner.nextInt();
 
             if (clientMode == 1) {
