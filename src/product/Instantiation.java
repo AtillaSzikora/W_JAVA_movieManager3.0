@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Instantiation {
+
     public static Map<String, Object> instanceMap() {
 
         Person jani = new Person("Ja", "Ni", Gender.MALE, 100);
