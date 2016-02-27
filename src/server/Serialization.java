@@ -1,6 +1,9 @@
 package server;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +28,7 @@ public class Serialization {
                 try {
                     tempObj = fois.readObject();
                     if (tempObj != Command.HEADER) {
-                        objectList.add(tempObj);
-                    System.out.println(objectList.get(i++)); } }
+                        objectList.add(tempObj); System.out.println(objectList.get(i++)); } }
                 catch (IOException e) {break;} }
             fois.close(); }
         catch (IOException | ClassNotFoundException e) {e.printStackTrace();}

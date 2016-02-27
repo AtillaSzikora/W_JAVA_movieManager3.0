@@ -30,20 +30,24 @@ public class RentManager {
         while (true) {
             System.out.print("\n\t1. (PUT) send objects to the server" +
                              "\n\t2. (GET) read objects from the server" +
+                             "\n\t3. (DEL) delete all objects from file" +
                              "\n\t0. (EXIT) shutdown server and client" +
-                             "\n(" + i++ + ") Choose a number to send command to the server: ");
+                             "\n(" + i++ + ") Enter a number to send command to the server: ");
             int clientMode = scanner.nextInt();
 
             if (clientMode == 1) {
                 soos.writeObject(Command.PUT);
                 soos.writeObject(objectList);
                 System.out.println("\n- - - LISTED OBJECTS ARE SENT TO THE SERVER - - -");
-                for (Object o : objectList) System.out.println(o); }
+                for (Object o : objectList) {System.out.println(o);} }
             else if (clientMode == 2) {
                 soos.writeObject(Command.GET);
                 List newObjectList = (List) sois.readObject();
                 System.out.println("\n- - - LISTED OBJECTS ARE RECIEVED FROM THE SERVER - - -");
-                for (Object o : newObjectList) System.out.println(o); }
+                for (Object o : newObjectList) {System.out.println(o);} }
+            else if (clientMode == 3) {
+                soos.writeObject(Command.DEL);
+                System.out.println("\n- - - ALL OBJECTS ARE DELETED FROM FILE - - -"); }
             else if (clientMode == 0) {
                 soos.writeObject(Command.EXIT);
                 System.out.println("\nServer and client shut down."); break; }
