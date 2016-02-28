@@ -25,7 +25,6 @@ public class ObjectServer {
 
     static void createEmptyFile()throws IOException {
         ObjectOutputStream foos = new ObjectOutputStream(new FileOutputStream(FILENAME));
-        foos.writeObject(Command.HEADER);
         foos.close(); }
 
     public static void main (String[] args) throws IOException {

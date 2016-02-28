@@ -20,15 +20,13 @@ public class Serialization {
     public static List<Object> deserialize(String fileName) {
         System.out.println("- - - LISTED OBJECTS ARE DESERIALIZED FROM '" +fileName + "' - - -");
         List<Object> objectList = new ArrayList<>();
-        Object tempObj;
         try {
             ObjectInputStream fois = new ObjectInputStream(new FileInputStream(fileName));
             int i = 0;
             while (true) {
                 try {
-                    tempObj = fois.readObject();
-                    if (tempObj != Command.HEADER) {
-                        objectList.add(tempObj); System.out.println(objectList.get(i++)); } }
+                    objectList.add(fois.readObject());
+                    System.out.println(objectList.get(i++)); }
                 catch (IOException e) {break;} }
             fois.close(); }
         catch (IOException | ClassNotFoundException e) {e.printStackTrace();}

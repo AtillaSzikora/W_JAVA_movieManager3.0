@@ -1,7 +1,12 @@
-package product;
+package main;
 
 import person.Gender;
 import person.Person;
+import product.Book;
+import product.Game;
+import product.Genre;
+import product.Movie;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

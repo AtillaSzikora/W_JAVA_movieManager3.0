@@ -1,3 +1,3 @@
 package server;
 
-public enum Command {GET, PUT, EXIT, DEL, HEADER}
+public enum Command {PUT, GET, DEL, EXIT}
