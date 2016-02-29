@@ -9,7 +9,6 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectServer {
@@ -17,11 +16,11 @@ public class ObjectServer {
     static final String FILENAME = "data.bin";
     static Path filePath = Paths.get(FILENAME);
     public static final int PORT = 4567;
-    static List<Object> objectList = new ArrayList<>();
+    static List objectList;
     static int i = 1;
 
     static void save() {Serialization.serialize(objectList, FILENAME);}
-    static List<Object> load() {return objectList = Serialization.deserialize(FILENAME);}
+    static List load() {return objectList = Serialization.deserialize(FILENAME);}
 
     static void createEmptyFile()throws IOException {
         ObjectOutputStream foos = new ObjectOutputStream(new FileOutputStream(FILENAME));
@@ -41,18 +40,18 @@ public class ObjectServer {
                 Object command = sois.readObject();
                 System.out.println("\n(" + i++ + ") " + command + " request arrived from client...");
                 if (command.equals(Command.PUT)) {
-                    objectList = (List<Object>) sois.readObject();
+                    objectList = (List) sois.readObject();
                     System.out.println("- - - LISTED OBJECTS ARE RECIEVED FROM THE CLIENT - - -");
                     for (Object o : objectList) {System.out.println(o);}
                     save(); }
-                if (command.equals(Command.GET)) {
+                else if (command.equals(Command.GET)) {
                     soos.writeObject(load());
                     System.out.println("- - - LISTED OBJECTS ARE SENT TO THE CLIENT - - -");
                     for (Object o : objectList) {System.out.println(o);} }
-                if (command.equals(Command.DEL)) {
+                else if (command.equals(Command.DEL)) {
                     createEmptyFile();
                     System.out.println("- - - ALL OBJECTS ARE DELETED FROM FILE - - -"); }
-                if (command.equals(Command.EXIT)) {
+                else if (command.equals(Command.EXIT)) {
                     System.out.println("Server closed connection.");
                     break; } }
             catch (IOException | ClassNotFoundException e) {e.printStackTrace(); break;} }

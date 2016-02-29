@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Serialization {
 
-    public static void serialize(List<Object> objectList, String fileName) {
+    public static void serialize(List objectList, String fileName) {
         System.out.println("- - - LISTED OBJECTS ARE SERIALIZED TO '" + fileName + "' - - -");
         try {
             AppendOOS faoos = new AppendOOS(new FileOutputStream(fileName, true));
